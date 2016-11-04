@@ -1,16 +1,15 @@
-CSCI340-DNS-Name-Resolution-Engine
-
-Using IPC
+CSCI340-DNS-Name-Resolution-Engine-IPC
 ==================================
 ##CSCI340 - Operating Systems
 Adapted from University of Colorado at Boulder CSCI3753 Assignment
+
 
 ##Introduction
 In this assignment you will develop a multi-process application that resolves domain names to IP addresses, similar to the operation preformed each time you access a new website in your web browser. The application is composed of two sub-systems, each with one pool of processes: requesters and resolvers. The sub-systems communicate with each other using a bounded buffer in shared memory.
 
 This type of system architecture is referred to as a Producer-Consumer architecture. It is also used in search engine systems, like Google. In these systems, a set of crawler processors place URLs onto a queue. This queue is then serviced by a set of indexer processes which connect to the websites, parse the content, and then add an entry to a search index. Refer to Figure 1 for a visual description.
 
-![Figure 1](https://raw.githubusercontent.com/CSUChico-CSCI340/CSCI340-DNS-Name-Resolution-Engine-IPC/master/handout/pa2_2.png "System Architecture: Basic Idea of Implementation")
+![Figure 1](https://github.com/CSUChico-CSCI340/CSCI340-DNS-Name-Resolution-Engine-IPC/raw/master/handout/pa2.png "System Architecture: Basic Idea of Implementation")
 Figure 1: System Architecture
 
 ##Description
