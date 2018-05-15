@@ -1,13 +1,13 @@
 CC = gcc
 CFLAGS = -c -g -Wall -Wextra
-LFLAGS = -Wall -Wextra
+LFLAGS = -Wall -Wextra -pthread
 
 .PHONY: all clean
 
 all: lookup multi-lookup
 
 multi-lookup: multi-lookup.o util.o
-	$(CC) $(LFLAGS) $^ -o $@
+	$(CC) $(LFLAGS) $^ -o $@ -lrt
 
 lookup: lookup.o util.o
 	$(CC) $(LFLAGS) $^ -o $@
