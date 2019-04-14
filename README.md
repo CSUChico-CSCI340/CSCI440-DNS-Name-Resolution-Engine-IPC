@@ -20,7 +20,7 @@ Your application will take as input a set of name files. Names files contain on
 The requester process pool services a set of name files, each of which contains a list of domain names. Each name that is read from each of the files is placed into a bounded buffer in shared memory. You need to use conditional variables, such that the requester will wait while bounded buffer is full.
 
 ### Resolver Processes
-The second process pool is comprised of a set of **PROCESS_MAX** resolver processes. The resolver process pool services the FIFO queue by taking a name out of the bounded buffer and resolving its IP address. After the name has been mapped to an IP address, the output is written to a line in the results.txt file in the following format:
+The second process pool is comprised of a set of **PROCESS_MAX** resolver processes. The resolver process pool takes a name out of the bounded buffer and resolves its IP address. After the name has been mapped to an IP address, the output is written to a line in the results.txt file in the following format:
 <pre>
 www.google.com,74.125.224.81
 </pre>
