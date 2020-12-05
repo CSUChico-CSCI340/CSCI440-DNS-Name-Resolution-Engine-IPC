@@ -87,7 +87,7 @@ To receive full credit, you must submit the following items to Turnin by the due
 * **multi-lookup.h**: A header file containing prototypes for any function you write as part of your program.
 
 ## Extra Credit
-For extra credit you can implement this assignment again using c11 synchronization's mutexes and conditional variables.
+For extra credit you can implement this assignment again using c++11 synchronization's mutexes and conditional variables.
 
 ## Grading
 To received full credit your program must:
