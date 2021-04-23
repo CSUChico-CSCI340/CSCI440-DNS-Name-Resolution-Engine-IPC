@@ -123,6 +123,7 @@ You may wish to consult the man pages for the following items, as they will be u
 * man 3 pthread_cond_wait()
 * man 3 pthread_cond_signal()
 * man 3 pthread_cond_broadcast()
+* man 2 mmap
 * man 3 fopen()
 * man 3 fclose()
 * man 3 fprintf()
