@@ -20,10 +20,10 @@ Your application will take as input a set of name files. Names files contain on
 The requester process pool services a set of name files, each of which contains a list of domain names. Each name that is read from each of the files is placed into a bounded buffer in shared memory. You need to use conditional variables, such that the requester will wait while bounded buffer is full.
 
 ### Resolver Processes
-The second process pool is comprised of a set of **PROCESS_MAX** resolver processes. The resolver process pool takes a name out of the bounded buffer and resolves its IP address. After the name has been mapped to an IP address, the output is written to a line in the results.txt file in the following format:
-<pre>
+The second process pool is comprised of a set of **PROCESS_MAX** resolver processes. The resolver process pool takes a name out of the bounded buffer and resolves its IP address. After the name has been mapped to an IP address, the output is written to a line in the `results.txt` file in the following format:
+```
 www.google.com,74.125.224.81
-</pre>
+```
 
 ### Synchronization and Deadlock
 Your application should synchronize access to shared resources and avoid deadlock. You are required to use mutexes and conditional variables to meet this requirement. There are at least two shared resources that must be protected: the bounded buffer and the output file. Neither of these resources is thread-safe by default, and you are only required to use conditional variables for the bounded buffer.
@@ -37,8 +37,8 @@ Some files are included with this assignment for your benefit. You are not requ
 
 1. **util.c** and **util.h** These two files contain the DNS lookup utility function. This function abstracts away a lot of the complexity involved with performing a DNS lookup. The function accepts a hostname as input and generates a corresponding dot-formatted IPv4 IP address string as output.
 	* Please consult the *util.h* header file for more detailed descriptions of each available function.
-2. **input/names*.txt** This is a set of sample name files. They follow the same format as mentioned earlier. Use them to test your program.
-3. **results-ref.txt** This result file is a sample output of the IPs for the hostnames from all the **names*.txt** files used as input.
+2. **input/names\*.txt** This is a set of sample name files. They follow the same format as mentioned earlier. Use them to test your program.
+3. **results-ref.txt** This result file is a sample output of the IPs for the hostnames from all the **names\*.txt** files used as input.
 4. **lookup.c** This program represents an un-threaded/single process solution to this assignment. Feel free to use it as a starting point for your program, or as a reference for using the utility functions and performing file i/o in C.
 5. **Makefile** A GNU Make makefile to build all the code.
 
@@ -98,13 +98,13 @@ To received full credit your program must:
 * Include your name in the header comment of your file
 
 This includes adhering to good coding style practices. To verify that you do not leak memory, I may use *valgrind* to test your program. To install *valgrind*, use the following command:
-<pre>
+```
 sudo apt-get install valgrind
-</pre>
+```
 And to use *valgrind* to monitor your program, use this command:
-<pre>
+```
 valgrind ./multi-lookup text1.txt text2.txt ...... textN.txt results.txt
-</pre>
+```
 Valgrind should report that you have freed all allocated memory and should not produce any additional warnings or errors.
 You can write your code in any environment you like. But you have to make sure that your programs can be compiled and executed on Ubuntu 16.04.
 
