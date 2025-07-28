@@ -1,6 +1,6 @@
-CSCI340-DNS-Name-Resolution-Engine-IPC
+CSCI440-DNS-Name-Resolution-Engine-IPC
 ==================================
-## CSCI340 - Operating Systems
+## CSCI440 - Operating Systems
 Adapted from University of Colorado at Boulder CSCI3753 Assignment
 
 
@@ -9,7 +9,7 @@ In this assignment you will develop a multi-process application that resolves do
 
 This type of system architecture is referred to as a Producer-Consumer architecture. It is also used in search engine systems, like Google. In these systems, a set of crawler processors place URLs onto a queue. This queue is then serviced by a set of indexer processes which connect to the websites, parse the content, and then add an entry to a search index. Refer to Figure 1 for a visual description.
 
-![Figure 1](https://github.com/CSUChico-CSCI340/CSCI340-DNS-Name-Resolution-Engine-IPC/raw/master/handout/pa2.png "System Architecture: Basic Idea of Implementation")
+![Figure 1](https://github.com/CSUChico-CSCI340/CSCI440-DNS-Name-Resolution-Engine-IPC/raw/master/handout/pa2.png "System Architecture: Basic Idea of Implementation")
 Figure 1: System Architecture
 
 ## Description
@@ -26,10 +26,22 @@ www.google.com,74.125.224.81
 ```
 
 ### Synchronization and Deadlock
-Your application should synchronize access to shared resources and avoid deadlock. You are required to use mutexes and conditional variables to meet this requirement. There are at least two shared resources that must be protected: the bounded buffer and the output file. Neither of these resources is thread-safe by default, and you are only required to use conditional variables for the bounded buffer.
+Your application should synchronize access to shared resources and avoid deadlock. **You are required to use mutexes and conditional variables to meet this requirement**. There are at least two shared resources that must be protected: the bounded buffer and the output file. Neither of these resources is thread-safe by default, and you are only required to use conditional variables for the bounded buffer.
 
 ### Ending the Program
 Your program must end after all the names in each file have been serviced by the application. This means that all the hostnames in all the input files have received a corresponding line in the output file.
+
+## Hand Out Instructions
+I recommend you use an Ubuntu Linux virtual machine to complete this assignment. Alternatively, you can
+use ecc-linux (although this hasn’t been tested) or your native Linux install.
+
+Download this repository as a zip file and then extract it where you would like to store your project files. An example for downloading and extracting the zip file is below, assuming you are in your home directory (you may remove the main.zip file after unzipping it):
+
+```bash
+~$ wget https://github.com/CSUChico-CSCI340/CSCI440-DNS-Name-Resolution-Engine-IPC/archive/refs/heads/main.zip
+~$ unzip main.zip
+~$ cd CSCI440-DNS-Name-Resolution-Engine-IPC/DNS-handout/
+```
 
 ## What's Included
 Some files are included with this assignment for your benefit. You are not required to use these files, but they may prove helpful.
@@ -76,12 +88,12 @@ You may use the following libraries and code to complete this assignment, as wel
 * Any functions in the C Standard Library
 * Standard Linux pthread functions
 * Standard Linux Random Number Generator functions
-* Standard Linux i/o functions
+* Standard Linux I/O functions
 
 If you would like to use additional external libraries, you must clear it with me first. You will not be allowed to use pre-existing thread-safe queue or file i/o libraries since the point of this assignment is to teach you how to make non-thread-safe resources thread-safe.
 
 ## What You Must Provide
-To receive full credit, you must submit the following items to Turnin by the due date.
+To receive full credit, you must submit the following items to [INGInious](https://inginious.csuchico.edu/) by the due date.
 
 * **multi-lookup.c**: Your program, conforming to the above requirements
 * **multi-lookup.h**: A header file containing prototypes for any function you write as part of your program.
@@ -95,7 +107,11 @@ To received full credit your program must:
 * Document any resources you use to solve your assignment in the header comment of your file
 * Include your name in the header comment of your file
 
-This includes adhering to good coding style practices. To verify that you do not leak memory, I may use *valgrind* to test your program. To install *valgrind*, use the following command:
+Your program should adhere to good coding style practices.
+
+### NOTE: VALGRIND HAS ISSUES WITH THREADS, ONLY USE IF YOU ARE CURIOUS
+
+To verify that you do not leak memory, you may want to use *valgrind* to test your program. To install *valgrind*, use the following command:
 ```
 sudo apt-get install valgrind
 ```
@@ -104,13 +120,13 @@ And to use *valgrind* to monitor your program, use this command:
 valgrind ./multi-lookup text1.txt text2.txt ...... textN.txt results.txt
 ```
 Valgrind should report that you have freed all allocated memory and should not produce any additional warnings or errors.
-You can write your code in any environment you like. But you have to make sure that your programs can be compiled and executed on Ubuntu 16.04.
+You can write your code in any environment you like. But you have to make sure that your programs can be compiled and executed on Ubuntu.
 
 ## References
 Refer to your textbook and class notes for descriptions of producer/consumer and reader/writer problems and the different strategies used to solve them.
 The Internet is also a good resource for finding information related to solving this assignment.
 
-You may wish to consult the man pages for the following items, as they will be useful and/or required to complete this assignment. Note that the first argument to the "man" command is the chapter, insuring that you access the appropriate version of each man page. See example *man man* for more information.
+You may wish to consult the man pages for the following items, as they will be useful and/or required to complete this assignment. Note that the first argument to the "man" command is the chapter, ensuring that you access the appropriate version of each man page. See example *man man* for more information.
 
 
 * man 3 pthread_mutex_init
@@ -131,3 +147,9 @@ You may wish to consult the man pages for the following items, as they will be u
 * man 3 perror
 * man 2 fork
 * man 1 valgrind
+
+The mutex-related man pages may not be installed by default. You can install them using the following:
+```bash
+sudo apt update
+sudo apt install manpages-posix-dev glibc-doc
+```
