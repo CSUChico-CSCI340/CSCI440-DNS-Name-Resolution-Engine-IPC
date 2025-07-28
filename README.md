@@ -5,7 +5,7 @@ Adapted from University of Colorado at Boulder CSCI3753 Assignment
 
 
 ## Introduction
-In this assignment you will develop a multi-process application that resolves domain names to IP addresses, similar to the operation preformed each time you access a new website in your web browser. The application is composed of two sub-systems, each with one pool of processes: requesters and resolvers. The sub-systems communicate with each other using a bounded buffer in shared memory.
+In this assignment you will develop a multi-process application that resolves domain names to IP addresses, similar to the operation preformed each time you access a new website in your web browser. The application is composed of two sub-systems, each with one pool of processes: requesters and resolvers. The sub-systems communicate with each other using a bounded buffer in shared memory. This assignment is similar to the previous assignment; however, in this case you will use inter-process communication (IPC) to share data between running processes. In this implementation, you will not use threads, but you will use mutexes and conditional variables.
 
 This type of system architecture is referred to as a Producer-Consumer architecture. It is also used in search engine systems, like Google. In these systems, a set of crawler processors place URLs onto a queue. This queue is then serviced by a set of indexer processes which connect to the websites, parse the content, and then add an entry to a search index. Refer to Figure 1 for a visual description.
 
