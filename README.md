@@ -26,7 +26,7 @@ www.google.com,74.125.224.81
 ```
 
 ### Synchronization and Deadlock
-Your application should synchronize access to shared resources and avoid deadlock. **You are required to use mutexes and conditional variables to meet this requirement**. There are at least two shared resources that must be protected: the bounded buffer and the output file. Neither of these resources is thread-safe by default, and you are only required to use conditional variables for the bounded buffer.
+Your application should synchronize access to shared resources to avoid race conditions and deadlock. **You are required to use mutexes and conditional variables to meet this requirement**. There are at least two shared resources that must be protected: the bounded buffer and the output file. Neither of these resources is thread-safe by default, and you are only required to use conditional variables for the bounded buffer.
 
 ### Ending the Program
 Your program must end after all the names in each file have been serviced by the application. This means that all the hostnames in all the input files have received a corresponding line in the output file.
