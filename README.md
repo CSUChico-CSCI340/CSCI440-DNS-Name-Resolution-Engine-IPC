@@ -5,7 +5,7 @@ Adapted from University of Colorado at Boulder CSCI3753 Assignment
 
 
 ## Introduction
-In this assignment you will develop a multi-process application that resolves domain names to IP addresses, similar to the operation preformed each time you access a new website in your web browser. The application is composed of two sub-systems, each with one pool of processes: requesters and resolvers. The sub-systems communicate with each other using a bounded buffer in shared memory. This assignment is similar to the previous assignment; however, in this case you will use inter-process communication (IPC) to share data between running processes. In this implementation, you will not use threads, but you will use mutexes and conditional variables.
+In this assignment you will develop a multi-process application that resolves domain names to IP addresses, similar to the operation preformed each time you access a new website in your web browser. The application is composed of two sub-systems, each with one pool of processes: requesters and resolvers. The sub-systems communicate with each other using a bounded buffer in shared memory. This assignment is similar to the previous assignment; however, in this case you will use inter-process communication (IPC) to share data between running processes. In this implementation, you will not use threads, but you will use mutexes and condition variables.
 
 This type of system architecture is referred to as a Producer-Consumer architecture. It is also used in search engine systems, like Google. In these systems, a set of crawler processors place URLs onto a queue. This queue is then serviced by a set of indexer processes which connect to the websites, parse the content, and then add an entry to a search index. Refer to Figure 1 for a visual description.
 
@@ -17,7 +17,7 @@ Figure 1: System Architecture
 Your application will take as input a set of name files. Names files contain one hostname per line. Each name file should be serviced by a single requester process from the requester process pool.
 
 ### Requester Processes
-The requester process pool services a set of name files, each of which contains a list of domain names. Each name that is read from each of the files is placed into a bounded buffer in shared memory. You need to use conditional variables, such that the requester will wait while bounded buffer is full.
+The requester process pool services a set of name files, each of which contains a list of domain names. Each name that is read from each of the files is placed into a bounded buffer in shared memory. You need to use condition variables, such that the requester will wait while bounded buffer is full.
 
 ### Resolver Processes
 The second process pool is comprised of a set of **PROCESS_MAX** resolver processes. The resolver process pool takes a name out of the bounded buffer and resolves its IP address. After the name has been mapped to an IP address, the output is written to a line in the `results.txt` file in the following format:
@@ -26,7 +26,7 @@ www.google.com,74.125.224.81
 ```
 
 ### Synchronization and Deadlock
-Your application should synchronize access to shared resources to avoid race conditions and deadlock. **You are required to use mutexes and conditional variables to meet this requirement**. There are at least two shared resources that must be protected: the bounded buffer and the output file. Neither of these resources is thread-safe by default, and you are only required to use conditional variables for the bounded buffer.
+Your application should synchronize access to shared resources to avoid race conditions and deadlock. **You are required to use mutexes and condition variables to meet this requirement**. There are at least two shared resources that must be protected: the bounded buffer and the output file. Neither of these resources is thread-safe by default, and you are only required to use condition variables for the bounded buffer.
 
 ### Ending the Program
 Your program must end after all the names in each file have been serviced by the application. This means that all the hostnames in all the input files have received a corresponding line in the output file.
