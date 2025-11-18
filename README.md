@@ -5,7 +5,7 @@ Adapted from University of Colorado at Boulder CSCI3753 Assignment
 
 
 ## Introduction
-In this assignment you will develop a multi-process application that resolves domain names to IP addresses, similar to the operation preformed each time you access a new website in your web browser. The application is composed of two sub-systems, each with one pool of processes: requesters and resolvers. The sub-systems communicate with each other using a bounded buffer in shared memory. This assignment is similar to the previous assignment; however, in this case you will use inter-process communication (IPC) to share data between running processes. In this implementation, you will not use threads, but you will use mutexes and condition variables.
+In this assignment you will develop a multi-process application that resolves domain names to IP addresses, similar to the operation preformed each time you access a new website in your web browser. The application is composed of two sub-systems, each with one pool of processes: requesters and resolvers. The sub-systems communicate with each other using a bounded buffer in shared memory. This assignment is similar to the previous assignment; however, in this case you will use inter-process communication (IPC) to share data between running processes (a parent process and child processes). In this implementation, you should not use threads, but you will use mutexes and condition variables.
 
 This type of system architecture is referred to as a Producer-Consumer architecture. It is also used in search engine systems, like Google. In these systems, a set of crawler processors place URLs onto a queue. This queue is then serviced by a set of indexer processes which connect to the websites, parse the content, and then add an entry to a search index. Refer to Figure 1 for a visual description.
 
@@ -51,7 +51,7 @@ Some files are included with this assignment for your benefit. You are not requ
 	* Please consult the *util.h* header file for more detailed descriptions of each available function.
 2. **input/names\*.txt** This is a set of sample name files. They follow the same format as mentioned earlier. Use them to test your program.
 3. **results-ref.txt** This result file is a sample output of the IPs for the hostnames from all the **names\*.txt** files used as input.
-4. **lookup.c** This program represents an un-threaded/single process solution to this assignment. Feel free to use it as a starting point for your program, or as a reference for using the utility functions and performing file i/o in C.
+4. **lookup.c** This program represents a single-thread/single-process solution to this assignment. Feel free to use it as a starting point for your program, or as a reference for using the utility functions and performing file i/o in C.
 5. **Makefile** A GNU Make makefile to build all the code.
 
 ## Additional Specifications
@@ -62,7 +62,7 @@ Your executable program should be named "multi-lookup". When called, it should i
 
 An example call involving three input files might look like:
 <pre>
-multi-lookup names1.txt names2.txt names3.txt result.txt
+./multi-lookup input/names1.txt input/names2.txt input/names3.txt myresult.txt
 </pre>
 
 ### Limits
@@ -109,13 +109,11 @@ To received full credit your program must:
 
 Your program should adhere to good coding style practices.
 
-### NOTE: VALGRIND HAS ISSUES WITH THREADS, ONLY USE IF YOU ARE CURIOUS
-
 To verify that you do not leak memory, you may want to use *valgrind* to test your program. To install *valgrind*, use the following command:
 ```
 sudo apt-get install valgrind
 ```
-And to use *valgrind* to monitor your program, use this command:
+And to use *valgrind* to monitor your program, use the `valgrind` command:
 ```
 valgrind ./multi-lookup text1.txt text2.txt ...... textN.txt results.txt
 ```
